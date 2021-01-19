@@ -14,6 +14,7 @@ Use 'raspi-config' to enable SPI.
 cd /opt  
 sudo git clone https://github.com/jens-schiffke/Rhasspy-LED.git  
 sudo pip3 install rpi.gpio  
+sudo pip3 install apa102_pi
 sudo cp /opt/Rhasspy-LED/Rhasspy-LED/rhasspy-led.service /etc/systemd/system/  
 sudo systemctl daemon-reload  
 sudo systemctl enable rhasspy-led.service  
