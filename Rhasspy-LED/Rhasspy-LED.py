@@ -75,11 +75,11 @@ while True:
       elif counter == 3 and mute == "off":
         mute = "on"
         LED = "off"
-        os.system("amixer -p -c 'seeed2micvoicec' sset Capture 0")
+        os.system("amixer -q -c 'seeed2micvoicec' sset Capture 0")
       elif counter == 3 and mute == "on":
         mute = "off"
         LED = "on"
-        os.system("amixer -p -c 'seeed2micvoicec' sset Capture 63")
+        os.system("amixer -q -c 'seeed2micvoicec' sset Capture 63")
       elif counter == 1 and LED == "on":
         LED = "off"
       elif counter == 1 and LED == "off":
