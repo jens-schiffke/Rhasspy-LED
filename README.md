@@ -1,7 +1,6 @@
 # Rhasspy-LED
 LED-Service for Rhasspy with a Raspberry and ReSpeaker 2-Mics Pi HAT
 
-
 Install Driver
 sudo apt-get update
 sudo apt-get upgrade
