@@ -2,6 +2,7 @@
 LED-Service for Rhasspy with a Raspberry and ReSpeaker 2-Mics Pi HAT
 
 Install Driver  
+
 sudo apt-get update  
 sudo apt-get upgrade  
 git clone https://github.com/respeaker/seeed-voicecard.git  
@@ -10,6 +11,7 @@ sudo ./install.sh
 reboot  
 
 Install Service  
+
 Use 'raspi-config' to enable SPI.  
 cd /opt  
 sudo git clone https://github.com/jens-schiffke/Rhasspy-LED.git  
