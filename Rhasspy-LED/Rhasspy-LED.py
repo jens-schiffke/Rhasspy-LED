@@ -70,6 +70,7 @@ while True:
         strip.show()
         sleep(2)
         strip.set_pixel(1,0,0,0,0)
+        strip.show()
         sleep(.2)
         os.system("shutdown -h now")
       elif counter == 3 and mute == "off":
