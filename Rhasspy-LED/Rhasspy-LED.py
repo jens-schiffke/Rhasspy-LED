@@ -7,23 +7,23 @@ import json
 import os
 
 rhasspyConfig = '/root/.config/rhasspy/profiles/de/profile.json'
-
 counter = 0
 LED = "on"
 mute = "off"
 siteId = ""
 MQTThost = ""
+volumeOn = "95%"
 
-with open(rhasspyConfig,'r', encoding='utf-8') as file:
+with open(rhasspyConfig,'r', encoding='UTF-8') as file:
     obj = json.loads(file.read())
     MQTTconfig = json.dumps(obj["mqtt"])
     MQTTconfig = MQTTconfig.replace("\"mqtt\": ","")
     MQTTconfig = json.loads(MQTTconfig)
-    siteId = json.dumps(MQTTconfig["site_id"])
-    MQTThost = json.dumps(MQTTconfig["host"])
+    siteId = MQTTconfig["site_id"]
+    MQTThost = MQTTconfig["host"]
     MQTThost = MQTThost.strip('"')
     if "port" in json.dumps(MQTTconfig):
-      MQTTport = json.dumps(MQTTconfig["port"])
+      MQTTport = MQTTconfig["port"]
       MQTTport = MQTTport.strip('"')
       MQTTport = int(MQTTport)
     else:
@@ -38,13 +38,14 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("hermes/hotword/toggleOff/#")
 
 def on_message(client, userdata, msg):
-    if msg.topic == "hermes/hotword/toggleOff" and "dialogueSession" in str(msg.payload) and '"siteId": ' + siteId in str(msg.payload) and LED == "on":
+    jsonData = json.loads(msg.payload)
+    if msg.topic == "hermes/hotword/toggleOff" and "dialogueSession" in str(msg.payload) and jsonData["siteId"] == siteId and LED == "on":
       strip.set_pixel(1,0,255,0,7)
       strip.show()
-    elif msg.topic == "hermes/dialogueManager/sessionEnded" and '"siteId": ' + siteId in str(msg.payload):
+    elif msg.topic == "hermes/dialogueManager/sessionEnded" and jsonData["siteId"] == siteId:
       strip.set_pixel(1,0,255,0,0)
       strip.show()
-    elif str(msg.payload) == 'b\'{"siteId": ' + siteId + ', "reason": "ttsSay"}\'' and LED == "on":
+    elif jsonData["siteId"] == siteId and jsonData["reason"] == "ttsSay" and LED == "on":
       strip.set_pixel(1,0,0,255,7)
       strip.show()
 
@@ -80,7 +81,8 @@ while True:
       elif counter == 3 and mute == "on":
         mute = "off"
         LED = "on"
-        os.system("amixer -q -c 'seeed2micvoicec' sset Capture 63")
+        mixercmd = "amixer -q -c 'seeed2micvoicec' sset Capture " + volumeOn
+        os.system(mixercmd)
       elif counter == 1 and LED == "on":
         LED = "off"
       elif counter == 1 and LED == "off":
