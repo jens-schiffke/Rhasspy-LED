@@ -1,5 +1,10 @@
 # Rhasspy-LED
-LED-Service for Rhasspy with a Raspberry and ReSpeaker 2-Mics Pi HAT
+LED-Service for Rhasspy with a Raspberry and ReSpeaker 2-Mics Pi HAT  
+  
+  Nach dem Wakeword wird die mittlere LED grün und anschließend bis zum Ende des Prozesses blau. Anschließend erlischt die LED wieder.
+  Man kann die Funktion durch einen kurzen Tastendruck auf den Button (de)aktivieren.
+  Drückt man 3 Sekunden, wird das Mikro aus- bzw. angeschaltet.
+  Hält man den Button 10 Sekunden gedrückt, leuchtet die LED für 2 Sekunden rot und der RPI wird heruntergefahren. Nach ca. 30 Sekunden kann man ihn dann vom Strom trennen.
 
 #### Install Driver  
 sudo apt-get update  
