@@ -29,7 +29,7 @@ with open(rhasspyConfig,'r', encoding='UTF-8') as file:
     else:
       MQTTport = 1883
 
-strip = apa102.APA102(num_led=3)
+strip = apa102.APA102(num_led=4)
 strip.clear_strip()
 
 def on_connect(client, userdata, flags, rc):
