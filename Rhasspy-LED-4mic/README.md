@@ -20,7 +20,7 @@ sudo git clone https://github.com/jens-schiffke/Rhasspy-LED.git
 sudo pip3 install rpi.gpio  
 sudo pip3 install apa102_pi  
 sudo apt-get install python3-paho-mqtt  
-sudo cp /opt/Rhasspy-LED/Rhasspy-LED-4mic/rhasspy-led.service /etc/systemd/system/  
+sudo cp /opt/Rhasspy-LED/Rhasspy-LED-4mic/rhasspy-led-4mic.service /etc/systemd/system/  
 sudo systemctl daemon-reload  
 sudo systemctl enable rhasspy-led-4mic.service  
 sudo reboot  
