@@ -3,7 +3,7 @@
 LED-Service for Rhasspy with a Raspberry and ReSpeaker 4-Mics Pi HAT  
   
   Nach dem Wakeword werden die LEDs grün und nach dem Sprachbefehl bis zum Ende des Prozesses blau. Anschließend erlöschen die LEDs wieder.
-  einen Button gibt es beim 4-Mics Pi HAT nicht.
+  Einen Button gibt es beim 4-Mics Pi HAT nicht.
 
 #### Install Driver  
 sudo apt-get update  
