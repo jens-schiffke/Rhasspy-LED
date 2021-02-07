@@ -18,16 +18,16 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(5, GPIO.OUT)
 GPIO.output(5, GPIO.HIGH)
 
-with open(rhasspyConfig,'r', encoding='utf-8') as file:
+with open(rhasspyConfig,'r', encoding='UTF-8') as file:
     obj = json.loads(file.read())
     MQTTconfig = json.dumps(obj["mqtt"])
     MQTTconfig = MQTTconfig.replace("\"mqtt\": ","")
     MQTTconfig = json.loads(MQTTconfig)
-    siteId = json.dumps(MQTTconfig["site_id"])
-    MQTThost = json.dumps(MQTTconfig["host"])
+    siteId = MQTTconfig["site_id"]
+    MQTThost = MQTTconfig["host"]
     MQTThost = MQTThost.strip('"')
     if "port" in json.dumps(MQTTconfig):
-      MQTTport = json.dumps(MQTTconfig["port"])
+      MQTTport = MQTTconfig["port"]
       MQTTport = MQTTport.strip('"')
       MQTTport = int(MQTTport)
     else:
@@ -42,15 +42,15 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("hermes/hotword/toggleOff/#")
 
 def on_message(client, userdata, msg):
-    if msg.topic == "hermes/hotword/toggleOff" and "dialogueSession" in str(msg.payload) and '"siteId": ' + siteId in str(msg.payload) and LED == "on":
+    if msg.topic == "hermes/hotword/toggleOff" and "dialogueSession" in str(msg.payload) and jsonData["siteId"] == siteId and LED == "on":
       for i in range(0,12):
         strip.set_pixel(i,0,127,0,7)
       strip.show()
-    elif msg.topic == "hermes/dialogueManager/sessionEnded" and '"siteId": ' + siteId in str(msg.payload):
+    elif msg.topic == "hermes/dialogueManager/sessionEnded" and jsonData["siteId"] == siteId:
       for i in range(0,12):
         strip.set_pixel(i,0,255,0,0)
       strip.show()
-    elif str(msg.payload) == 'b\'{"siteId": ' + siteId + ', "reason": "ttsSay"}\'' and LED == "on":
+    elif jsonData["siteId"] == siteId and jsonData["reason"] == "ttsSay" and LED == "on":
       for i in range(0,12):
         strip.set_pixel(i,0,0,127,7)
       strip.show()
