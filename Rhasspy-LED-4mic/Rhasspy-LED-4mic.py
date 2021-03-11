@@ -42,6 +42,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("hermes/hotword/toggleOff/#")
 
 def on_message(client, userdata, msg):
+    jsonData = json.loads(msg.payload)
     if msg.topic == "hermes/hotword/toggleOff" and "dialogueSession" in str(msg.payload) and jsonData["siteId"] == siteId and LED == "on":
       for i in range(0,12):
         strip.set_pixel(i,0,127,0,7)
