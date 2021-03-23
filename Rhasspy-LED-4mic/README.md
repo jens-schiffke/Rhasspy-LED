@@ -17,7 +17,7 @@ reboot
 Use 'raspi-config' to enable SPI.  
 cd /opt  
 sudo git clone https://github.com/jens-schiffke/Rhasspy-LED.git  
-sudo apt-get install python3-pip
+sudo apt-get install python3-pip  
 sudo pip3 install rpi.gpio  
 sudo pip3 install apa102_pi  
 sudo apt-get install python3-paho-mqtt  
